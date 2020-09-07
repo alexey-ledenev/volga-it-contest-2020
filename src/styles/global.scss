@@ -1,0 +1,40 @@
+@charset 'utf-8';
+@import "reset";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Ubuntu&display=swap');
+$family-sans-serif: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+$family-serif: 'Playfair Display', serif;
+$black: #393838;
+
+html {
+  font-size: 16px;
+  font-family: $family-sans-serif;
+  color: $black;
+}
+svg {
+  fill: currentColor;
+  vertical-align: middle;
+  &:not(:root) {
+    overflow: hidden;
+  }
+}
+#___gatsby, #gatsby-focus-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  @supports (-webkit-touch-callout: none) {
+    min-height: -webkit-fill-available;
+  }
+}
+#___gatsby {
+  overflow: hidden;
+}
+#gatsby-focus-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  main {
+    flex: 1 1 auto;
+    overflow: hidden;
+    max-width: 100%;
+  }
+}

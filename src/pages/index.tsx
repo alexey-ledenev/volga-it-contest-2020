@@ -1,11 +1,10 @@
-import React from "react"
-
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import React from 'react'
+import Layout from '../layouts'
+import SEO from '../components/seo'
 
 const IndexPage: React.FC = () => (
   <Layout>
-    <SEO title="Home" />
+    <SEO title="Главная" />
     <h1>Volga IT 2020</h1>
   </Layout>
 )

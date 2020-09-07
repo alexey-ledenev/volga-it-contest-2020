@@ -12,12 +12,22 @@ interface ISEOProps {
   title: string
 }
 
+interface ISiteData {
+  site: {
+    siteMetadata: {
+      title: string
+      description: string
+      author: string
+    }
+  }
+}
+
 const SEO: React.FC<ISEOProps> = ({
   description = '',
   meta = [],
-  title = 'Signal',
+  title = 'VOLGA-IT 2020',
 }) => {
-  const { site } = useStaticQuery(
+  const { site } = useStaticQuery<ISiteData>(
     graphql`
       query {
         site {
