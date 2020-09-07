@@ -3,12 +3,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Ubuntu&display=swap');
 $family-sans-serif: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
 $family-serif: 'Playfair Display', serif;
-$black: #393838;
+$dark: #393838;
+$white: #ffffff;
+@import "_helpers.sass";
 
 html {
   font-size: 16px;
   font-family: $family-sans-serif;
-  color: $black;
+  color: $dark;
 }
 svg {
   fill: currentColor;
@@ -37,4 +39,16 @@ svg {
     overflow: hidden;
     max-width: 100%;
   }
+}
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: none;
+  cursor: pointer;
 }

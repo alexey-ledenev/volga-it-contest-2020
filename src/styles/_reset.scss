@@ -70,6 +70,16 @@ textarea,
 select {
   font: inherit;
 }
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  line-height: 1;
+  user-select: none;
+  &:focus {
+    outline: none;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
