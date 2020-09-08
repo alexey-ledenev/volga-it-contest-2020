@@ -1,11 +1,12 @@
 import React from 'react'
 import Layout from '../layouts'
 import SEO from '../components/seo'
+import { MainScreen } from '../components/main-screen/main-screen'
 
 const IndexPage: React.FC = () => (
   <Layout>
     <SEO title="Главная" />
-    <h1>Volga IT 2020</h1>
+    <MainScreen />
   </Layout>
 )
 
