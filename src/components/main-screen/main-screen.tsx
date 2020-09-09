@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import Img from 'gatsby-image/withIEPolyfill'
+import Img from 'gatsby-image'
 import s from './main-screen.module.sass'
 
 export const MainScreen: React.FC = () => {
@@ -16,15 +16,17 @@ export const MainScreen: React.FC = () => {
       }
       fogRight: file(relativePath: { eq: "01_1_foggy.png" }) {
         childImageSharp {
-          fixed(width: 1920, quality: 80) {
-            ...GatsbyImageSharpFixed_withWebp
+          fluid(maxWidth: 1920, quality: 80) {
+            ...GatsbyImageSharpFluid_withWebp
+            ...GatsbyImageSharpFluidLimitPresentationSize
           }
         }
       }
       fogCenter: file(relativePath: { eq: "01_foggy.png" }) {
         childImageSharp {
-          fixed(width: 1920, quality: 80) {
-            ...GatsbyImageSharpFixed_withWebp
+          fluid(maxWidth: 1920, quality: 80) {
+            ...GatsbyImageSharpFluid_withWebp
+            ...GatsbyImageSharpFluidLimitPresentationSize
           }
         }
       }
@@ -35,19 +37,11 @@ export const MainScreen: React.FC = () => {
       <div className="absolute inset-0 w-full h-full">
         <Img fluid={images.bgImage.childImageSharp.fluid} />
       </div>
-      <div className="absolute inset-0 w-full h-full">
-        <Img
-          fixed={images.fogRight.childImageSharp.fixed}
-          objectFit="cover"
-          objectPosition="50% 50%"
-        />
+      <div className="absolute inset-0 w-full h-full fade-in animate-2s">
+        <Img fluid={images.fogRight.childImageSharp.fluid} />
       </div>
-      <div className="absolute inset-0 w-full h-full">
-        <Img
-          fixed={images.fogCenter.childImageSharp.fixed}
-          objectFit="cover"
-          objectPosition="50% 50%"
-        />
+      <div className="absolute inset-0 w-full h-full fade-in animate-2s">
+        <Img fluid={images.fogCenter.childImageSharp.fluid} />
       </div>
       <div
         className={`relative h-full flex flex-col justify-center text-white ${s.text}`}
