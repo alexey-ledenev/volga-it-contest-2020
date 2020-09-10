@@ -1,21 +1,20 @@
-=keyframes($name)
-  @-webkit-keyframes #{$name}
-    @content
-  @-moz-keyframes #{$name}
-    @content
-  @-ms-keyframes #{$name}
-    @content
-  @keyframes #{$name}
-    @content
+.slide-right
+  &-enter, &-appear
+    transform: translateX(100vw)
+  &-enter-active, &-appear-active
+    transform: translateX(0)
+    transition: transform 300ms
 
-+keyframes(fadeIn)
-  0%
+.fade
+  &-enter, &-appear
     opacity: 0
-  100%
+  &-enter-active, &-appear-active
     opacity: 1
+    transition: opacity 1000ms
 
-.fade-in
-  animation: fadeIn 1s ease .5s 1
-
-.animate-2s
-  animation-duration: 2s
+.fade-slow
+  &-enter, &-appear
+    opacity: 0
+  &-enter-active, &-appear-active
+    opacity: 1
+    transition: opacity 2000ms
