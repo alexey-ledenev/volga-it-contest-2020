@@ -31,6 +31,18 @@
       max-width: 44%
     &-wrapper
       padding: 0 12vw
+      opacity: 0
+      transition: opacity 350ms
+    &.entering
+      .app-header__menu-wrapper
+        opacity: 0.1
+    &.entered
+      .app-header__menu-wrapper
+        opacity: 1
+    &.exiting, &.exited
+      .app-header__menu-wrapper
+        opacity: 0
+        transition: opacity 200ms
     nav
       padding-right: 10vw
       min-width: 15rem

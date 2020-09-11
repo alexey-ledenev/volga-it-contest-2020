@@ -6,15 +6,13 @@
     transition: transform 300ms
 
 .fade
-  &-enter, &-appear
+  &-enter
     opacity: 0
-  &-enter-active, &-appear-active
+    &-active
+      opacity: 1
+      transition: opacity 1000ms
+  &-exit
     opacity: 1
-    transition: opacity 1000ms
-
-.fade-slow
-  &-enter, &-appear
-    opacity: 0
-  &-enter-active, &-appear-active
-    opacity: 1
-    transition: opacity 2000ms
+    &-active
+      opacity: 0
+      transition: opacity 1000ms

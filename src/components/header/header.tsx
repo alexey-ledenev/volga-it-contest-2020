@@ -104,19 +104,19 @@ function renderMenu(opened: boolean) {
                 <h5 className="h5">Мы в социальных сетях</h5>
                 <div className="flex my-5">
                   <a
-                    href="#"
+                    href="/#"
                     className="text-green bg-white hover:bg-green hover:text-white"
                   >
                     <TwitterSvg />
                   </a>
                   <a
-                    href="#"
+                    href="/#"
                     className="text-green bg-white hover:bg-green hover:text-white"
                   >
                     <InstagramSvg />
                   </a>
                   <a
-                    href="#"
+                    href="/#"
                     className="text-green bg-white hover:bg-green hover:text-white"
                   >
                     <VkSvg />
