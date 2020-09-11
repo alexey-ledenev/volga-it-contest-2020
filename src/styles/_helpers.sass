@@ -1,6 +1,8 @@
 .bg
   &-white
     background-color: $white
+  &-green
+    background-color: $green
 
 .text
   &-black
@@ -9,6 +11,8 @@
     color: $dark
   &-white
     color: $white
+  &-green
+    color: $green
 
 .relative
   position: relative
@@ -50,7 +54,22 @@
   &-screen-xxl
     max-width: 1920px
 
-.mx
-  &-auto
-    margin-left: auto
-    margin-right: auto
+.m
+  &x
+    &-auto
+      margin-left: auto
+      margin-right: auto
+  &y
+    &-5
+      margin-top: 1.25rem
+      margin-bottom: 1.25rem
+
+.hover
+  &\:bg
+    &-green
+      &:hover
+        background-color: $green
+  &\:text
+    &-white
+      &:hover
+        color: $white

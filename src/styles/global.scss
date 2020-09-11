@@ -6,6 +6,7 @@ $family-serif: 'Playfair Display', serif;
 $dark: #393838;
 $black: #202020;
 $white: #ffffff;
+$green: #066035;
 @import "animations";
 @import "helpers";
 
@@ -79,8 +80,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, p, .txt2 {
   font-style: normal;
   font-weight: normal;
   color: $black;
-  margin: 0;
-  padding: 0;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5 {
   font-family: $family-serif;
