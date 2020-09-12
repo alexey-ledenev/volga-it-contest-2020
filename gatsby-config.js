@@ -4,6 +4,7 @@ module.exports = {
     description: 'Digital contest',
     author: 'Alexey Ledenev',
   },
+  pathPrefix: '/volga-it-contest-2020',
   plugins: [
     'gatsby-plugin-react-helmet',
     {
