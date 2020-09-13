@@ -33,7 +33,7 @@ export const MainScreen: React.FC = () => {
   `)
   return (
     <CSSTransition in={true} timeout={300} appear classNames="slide-right">
-      <section className={`screen ${s.section}`}>
+      <section className={s.section}>
         <div className="relative mx-auto">
           <Img fluid={images.bgImage.childImageSharp.fluid} />
           <Img

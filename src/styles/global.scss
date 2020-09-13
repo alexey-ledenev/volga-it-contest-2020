@@ -29,24 +29,41 @@ svg {
   }
 }
 #___gatsby, #gatsby-focus-wrapper {
-  min-height: 100vh;
-  width: 100%;
-  max-width: 100vw;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   @supports (-webkit-touch-callout: none) {
-    min-height: -webkit-fill-available;
+    height: -webkit-fill-available;
   }
 }
-#___gatsby {
-  overflow: hidden;
-}
 #gatsby-focus-wrapper {
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
   main {
-    flex: 1 1 auto;
-    overflow: hidden;
-    max-width: 100%;
+    height: 100%;
+    min-width: 100%;
+    margin: 0;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      background-color: transparent;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scrollbar-color: transparent transparent;
+
+    section {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
   }
 }
 
@@ -60,18 +77,6 @@ svg {
   white-space: nowrap;
   box-shadow: none;
   cursor: pointer;
-}
-
-section {
-  position: relative;
-  width: 100%;
-  &.screen {
-    width: 100vw;
-    height: 100vh;
-    @supports (-webkit-touch-callout: none) {
-      height: -webkit-fill-available;
-    }
-  }
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, p, .txt2 {
