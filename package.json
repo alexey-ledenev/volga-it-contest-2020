@@ -2,7 +2,7 @@
   "name": "volga-it-contest-2020",
   "private": true,
   "description": "Digital contest",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Alexey Ledenev",
   "dependencies": {
     "gatsby": "2.24.53",
