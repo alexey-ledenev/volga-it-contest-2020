@@ -20,6 +20,13 @@ export const DescriptionScreen: React.FC = () => {
           }
         }
       }
+      leaves: file(relativePath: { eq: "leaves.png" }) {
+        childImageSharp {
+          fixed(width: 1240, quality: 95) {
+            ...GatsbyImageSharpFixed_withWebp
+          }
+        }
+      }
     }
   `)
   return (
@@ -51,6 +58,14 @@ export const DescriptionScreen: React.FC = () => {
           loading="lazy"
         />
       </article>
+      <div className={s.leafs}>
+        <Img
+          fixed={images.leaves.childImageSharp.fixed}
+          objectFit="cover"
+          objectPosition="50% 50%"
+          alt="Leafs"
+        />
+      </div>
     </section>
   )
 }

@@ -2,6 +2,21 @@
   display: flex
   align-items: flex-start
   padding: 6.875rem 2% 0 6.6%
+  transform-style: preserve-3d
+  & > *
+    transform: translateZ(0)
+  .leafs
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    transform: translateZ(-1px) scale(1.5)
+    background-size: 100%
+    // z-index: -1
+    padding-right: 3.5%
+    display: flex
+    justify-content: flex-end
   article
     flex-grow: 1
     padding-left: 4%
