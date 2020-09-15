@@ -1,14 +1,25 @@
-import React from 'react'
-import { Header } from '../components/header/header'
+import React, { useEffect, useRef, useState } from 'react'
+import { isBrowser } from '../utils'
 import { useHorizontalScroll } from '../hooks/useHorizontalScroll'
+import { Header } from '../components/header/header'
 import '../styles/global.scss'
 
 const Layout: React.FC = ({ children }) => {
-  const mainEl = React.useRef<HTMLElement>(null)
-  useHorizontalScroll(mainEl)
+  const [firstScreenOpened, setFirstScreenOpened] = useState(true)
+
+  const mainEl = useRef<HTMLElement>(null)
+  const [scrollLeft] = useHorizontalScroll(mainEl)
+
+  useEffect(() => {
+    if (isBrowser()) {
+      setFirstScreenOpened(
+        scrollLeft < (mainEl.current?.clientWidth || window.innerWidth) / 2
+      )
+    }
+  }, [scrollLeft])
   return (
     <>
-      <Header />
+      <Header colored={!firstScreenOpened} />
       <main ref={mainEl}>{children}</main>
     </>
   )

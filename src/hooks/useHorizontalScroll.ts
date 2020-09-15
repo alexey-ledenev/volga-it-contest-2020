@@ -1,11 +1,22 @@
-import { useEffect } from 'react'
-
-const isBrowser = (): boolean => typeof window !== 'undefined'
+import { useEffect, useState } from 'react'
+import { isBrowser } from '../utils'
 
 export const useHorizontalScroll = (
   elementRef?: React.RefObject<HTMLElement>
 ) => {
+  const [scrollLeft, setScrollLeft] = useState(
+    isBrowser() && elementRef?.current ? elementRef.current.scrollLeft : 0
+  )
   useEffect(() => {
+    function transformScroll(event: any) {
+      if (!event.deltaY) {
+        return
+      }
+      const diff = event.deltaY + event.deltaX
+      event.currentTarget.scrollLeft += diff
+      setScrollLeft(s => s + diff)
+      event.preventDefault()
+    }
     if (isBrowser()) {
       const element =
         elementRef?.current ||
@@ -15,12 +26,6 @@ export const useHorizontalScroll = (
       return () => element.removeEventListener('wheel', transformScroll)
     }
   }, [elementRef])
-}
 
-function transformScroll(event: any) {
-  if (!event.deltaY) {
-    return
-  }
-  event.currentTarget.scrollLeft += event.deltaY + event.deltaX
-  event.preventDefault()
+  return [scrollLeft]
 }

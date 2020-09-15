@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import { Transition } from 'react-transition-group'
 import Logo from '../../svg/logo'
@@ -22,17 +22,23 @@ const menuSubitems = [
   { title: 'Обратная связь', path: '#' },
 ] as const
 
-export const Header: React.FC = () => {
-  const [menuOpened, setMenuOpened] = React.useState(false)
+export const Header: React.FC<{ colored?: boolean }> = ({ colored }) => {
+  const [menuOpened, setMenuOpened] = useState(false)
+  const [lang, setLang] = useState<'en' | 'ru'>('en') // contains value for change (if lang === 'en', then current lang is 'ru')
   const toggleMenu = () => setMenuOpened(x => !x)
+  const changeLang = () => setLang(x => (x === 'en' ? 'ru' : 'en'))
   const MenuIcon = menuOpened ? CloseSvg : BurgerMenuSvg
   return (
     <header className="flex justify-between items-center w-full max-w-screen-xxl mx-auto app-header">
       {renderButton(<MenuIcon className="app-header__menu-icon" />, toggleMenu)}
-      <Link to="/" title="Greenfield" className="text-white">
+      <Link
+        to="/"
+        title="Greenfield"
+        className={colored ? 'text-dark-green' : 'text-white'}
+      >
         <Logo className="app-header__logo-icon" />
       </Link>
-      {renderButton(<span>En</span>)}
+      {renderButton(<span>{lang}</span>, changeLang)}
       {renderMenu(menuOpened)}
     </header>
   )
