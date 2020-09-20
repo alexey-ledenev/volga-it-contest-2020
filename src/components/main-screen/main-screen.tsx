@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { CSSTransition } from 'react-transition-group'
+import { ScrollCtx } from '../../layouts'
 import s from './main-screen.module.sass'
 
 export const MainScreen: React.FC = () => {
@@ -31,6 +32,17 @@ export const MainScreen: React.FC = () => {
       }
     }
   `)
+
+  const scrollLeftSubject = useContext(ScrollCtx)
+  useEffect(() => {
+    const s = scrollLeftSubject.subscribe({
+      next: v => console.log(`observerB: ${v}`),
+    })
+    return () => {
+      s.unsubscribe()
+    }
+  }, [scrollLeftSubject])
+
   return (
     <CSSTransition in={true} timeout={300} appear classNames="slide-right">
       <section className={s.section}>
