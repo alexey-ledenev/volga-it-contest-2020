@@ -14,6 +14,7 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    'gatsby-plugin-layout',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {
@@ -29,6 +30,6 @@ module.exports = {
       },
     },
     'gatsby-plugin-sass',
-    // 'gatsby-plugin-offline',
+    'gatsby-plugin-offline',
   ],
 }

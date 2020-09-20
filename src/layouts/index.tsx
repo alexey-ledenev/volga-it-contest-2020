@@ -17,6 +17,7 @@ const Layout: React.FC = ({ children }) => {
       )
     }
   }, [scrollLeft])
+
   return (
     <>
       <Header colored={!firstScreenOpened} />
