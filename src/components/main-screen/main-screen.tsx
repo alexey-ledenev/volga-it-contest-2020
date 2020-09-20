@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { CSSTransition } from 'react-transition-group'
+import { throttleTime } from 'rxjs/operators'
 import { ScrollCtx } from '../../layouts'
 import s from './main-screen.module.sass'
 
@@ -33,10 +34,19 @@ export const MainScreen: React.FC = () => {
     }
   `)
 
+  const [scale, setScale] = useState(1)
+  const sectionEl = useRef<HTMLElement>(null)
   const scrollLeftSubject = useContext(ScrollCtx)
   useEffect(() => {
-    const s = scrollLeftSubject.subscribe({
-      next: v => console.log(`observerB: ${v}`),
+    const s = scrollLeftSubject.pipe(throttleTime(100)).subscribe({
+      next: v => {
+        if (sectionEl === undefined || sectionEl.current === null) return
+        const { offsetLeft, scrollWidth } = sectionEl.current
+        const scrollOffset = offsetLeft + scrollWidth
+        if (v > offsetLeft && v < scrollOffset) {
+          setScale(1 + (v / scrollOffset) * 0.5)
+        }
+      },
     })
     return () => {
       s.unsubscribe()
@@ -45,9 +55,15 @@ export const MainScreen: React.FC = () => {
 
   return (
     <CSSTransition in={true} timeout={300} appear classNames="slide-right">
-      <section className={s.section}>
+      <section className={s.section} ref={sectionEl}>
         <div className="relative mx-auto">
-          <Img fluid={images.bgImage.childImageSharp.fluid} />
+          <Img
+            fluid={images.bgImage.childImageSharp.fluid}
+            style={{
+              transform: `scale(${scale})`,
+              transition: 'transform 100ms',
+            }}
+          />
           <Img
             fluid={images.fogRight.childImageSharp.fluid}
             style={{ position: 'absolute' }}

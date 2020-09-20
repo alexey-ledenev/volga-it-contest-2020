@@ -17,10 +17,11 @@ const Layout: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (isBrowser()) {
+      scrollLeftSubject.current.next(scrollLeft)
+
       setFirstScreenOpened(
         scrollLeft < (mainEl.current?.clientWidth || window.innerWidth) / 2
       )
-      scrollLeftSubject.current.next(scrollLeft)
     }
   }, [scrollLeft])
 
