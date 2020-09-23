@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Subject } from 'rxjs'
-import { isBrowser } from '../utils'
 import { useHorizontalScroll } from '../hooks/useHorizontalScroll'
 import { Header } from '../components/header/header'
 import '../styles/global.scss'
+import { throttleTime } from 'rxjs/operators'
 
 export const ScrollCtx = React.createContext(new Subject<number>())
 
@@ -11,25 +11,26 @@ const Layout: React.FC = ({ children }) => {
   const [firstScreenOpened, setFirstScreenOpened] = useState(true)
 
   const mainEl = useRef<HTMLElement>(null)
-  const [scrollLeft] = useHorizontalScroll(mainEl)
-
-  const scrollLeftSubject = useRef(new Subject<number>())
+  const scrollLeftSubject = useHorizontalScroll(mainEl)
 
   useEffect(() => {
-    if (isBrowser()) {
-      scrollLeftSubject.current.next(scrollLeft)
-
+    const s = scrollLeftSubject.pipe(throttleTime(50)).subscribe(scrollLeft => {
       setFirstScreenOpened(
         scrollLeft < (mainEl.current?.clientWidth || window.innerWidth) / 2
       )
+    })
+    return () => {
+      s.unsubscribe()
     }
-  }, [scrollLeft])
+  }, [scrollLeftSubject])
 
   return (
-    <ScrollCtx.Provider value={scrollLeftSubject.current}>
+    <>
       <Header colored={!firstScreenOpened} />
-      <main ref={mainEl}>{children}</main>
-    </ScrollCtx.Provider>
+      <ScrollCtx.Provider value={scrollLeftSubject}>
+        <main ref={mainEl}>{children}</main>
+      </ScrollCtx.Provider>
+    </>
   )
 }
 

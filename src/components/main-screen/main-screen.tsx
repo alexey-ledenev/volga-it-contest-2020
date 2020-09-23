@@ -38,7 +38,7 @@ export const MainScreen: React.FC = () => {
   const sectionEl = useRef<HTMLElement>(null)
   const scrollLeftSubject = useContext(ScrollCtx)
   useEffect(() => {
-    const s = scrollLeftSubject.pipe(throttleTime(100)).subscribe({
+    const s = scrollLeftSubject.pipe(throttleTime(200)).subscribe({
       next: v => {
         if (sectionEl === undefined || sectionEl.current === null) return
         const { offsetLeft, scrollWidth } = sectionEl.current
@@ -61,7 +61,7 @@ export const MainScreen: React.FC = () => {
             fluid={images.bgImage.childImageSharp.fluid}
             style={{
               transform: `scale(${scale})`,
-              transition: 'transform 100ms',
+              transition: 'transform 200ms',
             }}
           />
           <Img

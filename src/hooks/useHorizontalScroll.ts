@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import { Subject } from 'rxjs'
 import { isBrowser } from '../utils'
 
 export const useHorizontalScroll = (
   elementRef?: React.RefObject<HTMLElement>
 ) => {
-  const [scrollLeft, setScrollLeft] = useState(
-    isBrowser() && elementRef?.current ? elementRef.current.scrollLeft : 0
-  )
+  const scrollLeftSubject = useRef(new Subject<number>())
   useEffect(() => {
     function transformScroll(event: any) {
       if (!event.deltaY) {
         return
       }
-      const diff = event.deltaY + event.deltaX
-      event.currentTarget.scrollLeft += diff
-      setScrollLeft(s => s + diff)
+      event.currentTarget.scrollLeft += event.deltaY + event.deltaX
+      scrollLeftSubject.current.next(event.currentTarget.scrollLeft)
       event.preventDefault()
     }
     if (isBrowser()) {
@@ -22,10 +20,11 @@ export const useHorizontalScroll = (
         elementRef?.current ||
         document.scrollingElement ||
         document.documentElement
+      scrollLeftSubject.current.next(element.scrollLeft || 0)
       element.addEventListener('wheel', transformScroll)
       return () => element.removeEventListener('wheel', transformScroll)
     }
   }, [elementRef])
 
-  return [scrollLeft]
+  return scrollLeftSubject.current
 }
